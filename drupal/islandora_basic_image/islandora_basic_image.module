@@ -102,7 +102,8 @@ function islandora_basic_image_rdf_mapping() {
  * Implements hook_node_postinsert().
  */
 function islandora_basic_image_node_postinsert($node) {
-  if (isset($_SERVER['HTTP_IGNORE_HOOKS']) && strcmp(strtolower($_SERVER['HTTP_IGNORE_HOOKS']), "true") == 0) {
+  module_load_include('inc', 'islandora', 'include/utils');
+  if (islandora_ignore_hooks()) {
     return;
   }
 
@@ -141,7 +142,8 @@ function islandora_basic_image_node_postinsert($node) {
     );
   }
 
-  httprl_request("http://127.0.0.1:8888/islandora/rest/basic-image/?uuid=$parent_collection",
+  $url = "http://127.0.0.1:8181/cxf/islandora/image/$parent_collection";
+  httprl_request($url,
                  $options);
   $response = httprl_send_request();
 }
@@ -150,7 +152,8 @@ function islandora_basic_image_node_postinsert($node) {
  * Implements hook_node_postupdate().
  */
 function islandora_basic_image_node_postupdate($node) {
-  if (isset($_SERVER['HTTP_IGNORE_HOOKS']) && strcmp(strtolower($_SERVER['HTTP_IGNORE_HOOKS']), "true") == 0) {
+  module_load_include('inc', 'islandora', 'include/utils');
+  if (islandora_ignore_hooks()) {
     return;
   }
 
@@ -184,7 +187,29 @@ function islandora_basic_image_node_postupdate($node) {
     );
   }
 
-  httprl_request("http://127.0.0.1:8888/islandora/rest/basic-image/?uuid={$node->uuid}",
+  httprl_request("http://127.0.0.1:8181/cxf/islandora/image/{$node->uuid}",
                  $options);
+  $response = httprl_send_request();
+}
+
+/**
+ * Implements hook_node_postdelete().
+ */
+function islandora_basic_image_node_postdelete($node) {
+  module_load_include('inc', 'islandora', 'include/utils');
+  if (islandora_ignore_hooks()) {
+    return;
+  }
+
+  // Exit early if it's not a collection.
+  if (strcmp($node->type, ISLANDORA_BASIC_IMAGE_CONTENT_TYPE) != 0) {
+    return;
+  }
+
+  $uuid = $node->uuid;
+  httprl_request("http://127.0.0.1:8181/cxf/islandora/image/$uuid",
+                 array(
+                   'method' => 'DELETE',
+                 ));
   $response = httprl_send_request();
 }

@@ -57,7 +57,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 9000, host: 9000 # XDebug
 
   config.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--memory", '2048']
+    vb.customize ["modifyvm", :id, "--memory", '4096']
+    vb.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
   end
 
   config.vm.provision :shell, inline: "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile", :privileged =>false
@@ -66,17 +67,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, :path => "./scripts/drupal.sh", :args => home_dir
   config.vm.provision :shell, :path => "./scripts/fcrepo.sh", :args => home_dir
   config.vm.provision :shell, :path => "./scripts/blazegraph.sh", :args => home_dir
-  config.vm.provision :shell, :path => "./scripts/fcrepo-camel-toolbox.sh", :args => home_dir
   config.vm.provision :shell, :path => "./scripts/islandora-commands.sh", :args => home_dir
+  config.vm.provision :shell, :path => "./scripts/islandora-camel.sh", :args => home_dir
   config.vm.provision :shell, :path => "./scripts/karaf.sh", :args => home_dir
-  config.vm.provision :shell, :path => "./scripts/hawtio.sh", :args => home_dir
-  config.vm.provision :shell, :path => "./scripts/camel.sh", :args => home_dir
-  config.vm.provision :shell, :path => "./scripts/fcrepo-camel.sh", :args => home_dir
-  config.vm.provision :shell, :path => "./scripts/activemq.sh", :args => home_dir
+  config.vm.provision :shell, :path => "./scripts/islandora-karaf-components.sh", :args => home_dir
   config.vm.provision :shell, :path => "./scripts/config.sh", :args => home_dir
-  config.vm.provision :shell, :path => "./scripts/islandora-component.sh", :args => home_dir
-  config.vm.provision :shell, :path => "./scripts/sync.sh", :args => home_dir
-  config.vm.provision :shell, :path => "./scripts/services.sh", :args => home_dir
   config.vm.provision :shell, :path => "./scripts/xdebug.sh", :args => home_dir
   config.vm.provision :shell, :path => "./scripts/post-install.sh", :args => home_dir
 end

@@ -1,4 +1,4 @@
-# Islandora [![Build Status](https://travis-ci.org/Islandora-Labs/islandora.png?branch=7.x-2.x)](https://travis-ci.org/Islandora-Labs/islandora)
+# Islandora [![Build Status](https://travis-ci.org/Islandora-CLAW/CLAW.png?branch=7.x-2.x)](https://travis-ci.org/Islandora-CLAW/CLAW)
 
 ## Introduction
 
@@ -6,7 +6,7 @@
 
 This is where the Islandora and Fedora 4 development will happen. If you would like to get involved in the community around this project, please check out the Islandora Foundation [Fedora 4 Interest Group](https://github.com/Islandora/Islandora-Fedora4-Interest-Group).
 
-For more information about the project, please see the [project documentation](http://islandora-labs.github.io/islandora/).
+For more information about the project, please see the [project documentation](http://islandora-claw.github.io/CLAW/).
 
 ### Repository layout
 

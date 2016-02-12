@@ -12,6 +12,7 @@ cd "$HOME_DIR"
 
 # Drush and drupal deps
 apt-get -y install php5-gd
+apt-get -y install php5-stomp
 apt-get -y install drush
 a2enmod rewrite
 service apache2 reload
@@ -93,7 +94,9 @@ cp -a "$DRUPAL_HOME"/sites/all/modules/apachesolr/solr-conf/solr-4.x/. "$SOLR_HO
 service tomcat7 restart
 
 # Islandora modules
-ln -s "$HOME_DIR"/islandora/drupal islandora
+if [ ! -f "islandora" ]; then
+  ln -s "$HOME_DIR/islandora/drupal/" islandora
+fi
 drush -y en islandora
 drush -y en islandora_dc
 drush -y en islandora_mods

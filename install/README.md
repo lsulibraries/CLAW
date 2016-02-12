@@ -8,19 +8,20 @@ N.B. This virtual machine **should not** be used in production.
 
 1. [VirtualBox](https://www.virtualbox.org/)
 2. [Vagrant](http://www.vagrantup.com/)
+3. [git](https://git-scm.com/)
 
 ## Use
 
 VirtualBox:
 
-1. `git clone https://github.com/islandora-labs/islandora`
-2. `cd islandora/install`
+1. `git clone https://github.com/Islandora-CLAW/CLAW`
+2. `cd CLAW/install`
 3. `vagrant up`
 
 DigitalOcean:
 
-1. `git clone https://github.com/islandora-labs/islandora`
-2. `cd islandora/install`
+1. `git clone https://github.com/Islandora-CLAW/CLAW`
+2. `cd CLAW/install`
 3. `vagrant plugin install vagrant-digitalocean`
 4. Set the following environment variables:
   * `DIGITALOCEAN_TOKEN` -- Your DigitalOcean API token
@@ -30,8 +31,8 @@ DigitalOcean:
 
 Amazon:
 
-1. `git clone https://github.com/islandora-labs/islandora`
-2. `cd islandora/install`
+1. `git clone https://github.com/Islandora-CLAW/CLAW`
+2. `cd CLAW/install`
 3. `vagrant plugin install vagrant-aws`
 4. Set the following environment variables:
   * `AWS_KEY`
